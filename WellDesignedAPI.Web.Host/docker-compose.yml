@@ -1,0 +1,19 @@
+#Not used / configured as single container used and also run in Visual Studio, would need further work to get running in e.g. Visual Studio Code, for this and the different services as part of a microservices application
+version: '3.8'
+
+services:
+  myapp:
+    image: welldesignedapi
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:80"  # HTTP port mapping
+      - "443:443"  # HTTPS port mapping
+    volumes:
+      - ./certs:/certs  # Mount SSL/TLS certificates into the container
+    environment:
+      - ASPNETCORE_URLS=https://+:443  # Configure ASP.NET Core to listen on HTTPS
+      - ASPNETCORE_HTTPS_PORT=443  # Set the HTTPS port for ASP.NET Core
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/server.crt  # Path to SSL/TLS certificate
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=pass  # Certificate password

@@ -1,0 +1,22 @@
+#Standard Dev env docker file for debugging in Visual Studio, would create another Dockerfile for publish phase
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+COPY ["WellDesignedAPI.Web.Host/WellDesignedAPI.Web.Host.csproj", "WellDesignedAPI.Web.Host/"]
+RUN dotnet restore "WellDesignedAPI.Web.Host/WellDesignedAPI.Web.Host.csproj"
+COPY . .
+WORKDIR "/src/WellDesignedAPI.Web.Host"
+RUN dotnet build "WellDesignedAPI.Web.Host.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "WellDesignedAPI.Web.Host.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "WellDesignedAPI.Web.Host.dll"]
