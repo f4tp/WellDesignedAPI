@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WellDesignedAPI.Common.Models.Request;
+using WellDesignedAPI.Common.Models.Response;
 
-namespace WellDesignedAPI.Application
+namespace WellDesignedAPI.Application.ApplicationServices
 {
     public interface IMovieAppService
     {
+        Task<EntitySearchResponse> RetrieveMoviesPagedResultsSearch(RecordSearchRequest recordSearchRequestParams);
     }
 }

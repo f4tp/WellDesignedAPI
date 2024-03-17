@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WellDesignedAPI.Common.Models.Request;
+using WellDesignedAPI.EntityFramework.Entities;
 
-namespace WellDesignedAPI.Domain
+namespace WellDesignedAPI.Domain.DomainServices
 {
     public interface IMovieDomainService
     {
+        Task<IEnumerable<Movie>> RetrieveMoviesPagedResultsSearch(RecordSearchRequest recordSearchRequestParams);
+
+        Task<int> GetCountOfMovies();
     }
 }

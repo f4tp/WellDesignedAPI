@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using WellDesignedAPI.Common.MagicStrings.Consts;
 using WellDesignedAPI.Common.Models;
+using WellDesignedAPI.Common.Models.Response;
 
 namespace WellDesignedAPI.Web.Host.Middleware
 {

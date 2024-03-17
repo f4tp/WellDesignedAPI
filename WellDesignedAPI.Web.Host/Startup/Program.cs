@@ -3,26 +3,31 @@ using NLog;
 using NLog.Web;
 using WellDesignedAPI.Application;
 using WellDesignedAPI.Web.Host.Startup.Extensions;
+using Newtonsoft.Json;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
 try
 {
-
-
     var builder = WebApplication.CreateBuilder(args);
     var configuration = builder.Configuration;
     var environment = builder.Environment;
 
     // Add services to the container.
 
-    builder.Services.AddControllers();
+    builder.Services
+        .AddControllers()
+        .AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;}); //likely never needed but helps with serialising entities (stops circular references on e.g. many to many relationships, but use of DTOs negates this, just a catch all here for testing purposes)
+
     builder.Services.AddAutoMapper(typeof(MappingProfile));
     builder.Services.ConfigureApiVersioning();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     // Register DI Containers via Service Extension
     builder.Services.RegisterDIContainers();
+
+    // Configure DbContexts for Entity Framework Core
+    builder.Services.ConfigureDbContexts(configuration);
 
     //setup NLog
     builder.Logging.ClearProviders();
