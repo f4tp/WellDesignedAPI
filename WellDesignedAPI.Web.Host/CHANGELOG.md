@@ -29,6 +29,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ---------------------------------------------------------------------------------------------------------
 
+## [0.0.1 - 2024-03-17]
+## ADDED
+- Basic, functioning example added
+
 ## [0.0.0 - 2024-03-16]
 ## ADDED
 - Repo created

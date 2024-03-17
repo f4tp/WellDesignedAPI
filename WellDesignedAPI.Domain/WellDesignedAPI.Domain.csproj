@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WellDesignedAPI.Common\WellDesignedAPI.Common.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.EntityFramework\WellDesignedAPI.EntityFramework.csproj" />
+  </ItemGroup>
+
 </Project>
