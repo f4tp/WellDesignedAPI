@@ -5,6 +5,6 @@ namespace WellDesignedAPI.Application.ApplicationServices
 {
     public interface IMovieAppService
     {
-        Task<EntitySearchResponse> RetrieveMoviesPagedResultsSearch(RecordSearchRequest recordSearchRequestParams);
+        Task<RecordSearchResponse> RetrieveMoviesPagedResultsSearch(RecordSearchRequest recordSearchRequestParams);
     }
 }

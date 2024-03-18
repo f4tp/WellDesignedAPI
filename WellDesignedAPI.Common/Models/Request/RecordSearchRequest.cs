@@ -6,7 +6,7 @@ namespace WellDesignedAPI.Common.Models.Request
     {
         [Range(1, int.MaxValue, ErrorMessage = "Search requires a valid page number")]
         public int RequiredPageNumber { get; set; }
-        [Range(1, 200, ErrorMessage = "Search returns a maximum of 1000 results")]
+        [Range(1, 200, ErrorMessage = "Search returns a maximum of 200 results")]
         public int NumberOfResultsPerPage { get; set; }
         public IEnumerable<FilterState>? Filters { get; set; }
         public string? SortBy { get; set; }

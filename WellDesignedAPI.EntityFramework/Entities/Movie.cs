@@ -31,8 +31,8 @@ namespace WellDesignedAPI.EntityFramework.Entities
         [Column("VoteCount", TypeName = "INTEGER")]
         public int? NoOfVotes { get; set; }
 
-        [Column("VoteAverage", TypeName = "FLOAT")]
-        public double? VoteAverageScore { get; set; }
+        [Column("VoteAverage", TypeName = "DECIMAL(3, 1)")]
+        public decimal? VoteAverageScore { get; set; }
         
         [Required]
         [Column("OriginalLanguage", TypeName = "NVARCHAR(10)")]

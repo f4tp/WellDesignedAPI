@@ -28,6 +28,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ---------------------------------------------------------------------------------------------------------
+## [0.0.2 - 2024-03-18]
+## ADDED
+- Validation for filter state
+## CHANGED
+- Data type for Movie.VoteAverage
+## FIXED
+- Total count for returned records for paged movie search
 
 ## [0.0.1 - 2024-03-17]
 ## ADDED

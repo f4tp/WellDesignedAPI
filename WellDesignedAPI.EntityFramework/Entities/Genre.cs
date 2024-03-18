@@ -11,7 +11,8 @@ namespace WellDesignedAPI.EntityFramework.Entities
         [Column("GenreId", TypeName = "INTEGER")]
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        [Column("Name", TypeName = "NVARCHAR(500)")]
+        public string GenreName { get; set; }
 
         private Genre(){} //for EF, requires a parameterless constructor
         public Genre(string genreName)
@@ -19,7 +20,7 @@ namespace WellDesignedAPI.EntityFramework.Entities
             if(string.IsNullOrWhiteSpace(genreName))
                 throw new ArgumentException("Object creation requires a genre name");
 
-            Name = genreName;
+            GenreName = genreName;
         }
 
     }

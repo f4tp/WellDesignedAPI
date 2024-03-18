@@ -9,7 +9,7 @@ namespace WellDesignedAPI.Application.DTOs.Entity.GetMovie
         public string? Synopsis { get; set; }
         public decimal? PopularityLevel { get; set; }
         public int? NoOfVotes { get; set; }
-        public double? VoteAverageScore { get; set; }
+        public decimal? VoteAverageScore { get; set; }
         public string MainLanguage { get; set; }
         public string? UrlForPoster { get; set; }
         public IEnumerable<MovieGenreDto>? MovieGenres { get; set; }
