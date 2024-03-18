@@ -7,7 +7,7 @@ CREATE TABLE Movies (
     Overview NVARCHAR(MAX),
     Popularity DECIMAL(10, 3),
     VoteCount INT,
-    VoteAverage FLOAT,
+    VoteAverage DECIMAL(3, 1),
     OriginalLanguage NVARCHAR(10),
     PosterUrl NVARCHAR(MAX)
 );

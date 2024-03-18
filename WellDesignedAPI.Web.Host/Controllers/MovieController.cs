@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using NLog.Filters;
 using WellDesignedAPI.Application.ApplicationServices;
+using WellDesignedAPI.Common.Helpers;
 using WellDesignedAPI.Common.Models.Request;
+using WellDesignedAPI.Common.Models.Response;
+using WellDesignedAPI.EntityFramework.Entities;
 
 namespace WellDesignedAPI.Web.Host.Controllers
 {
@@ -33,20 +38,110 @@ namespace WellDesignedAPI.Web.Host.Controllers
         {
 
             //TODO
-            // Validate filter propoerties:
-            //// Any DateFrom and DateTo are in the correct format - coming through as a strign representation for better generic application
-            ////As above for integer
-            ////As above for decimal
-            ////As above for double
-            ////Validate all property names passed in through magic strings exist on the Movie entity
-            /////As much of the above can go in the Movie class
+            //Apply logic to allow searching on all properties of the Movie class
+            
+            var potentialBadRequestToReturn = ValidateGetMoviesEfSearchSortFIlterState(recordSearchRequestParams);
+            if (potentialBadRequestToReturn != null)
+                return potentialBadRequestToReturn;
+
 
             var movieSearchResponse = await _movieAppService.RetrieveMoviesPagedResultsSearch(recordSearchRequestParams);
 
-            if (movieSearchResponse == null)
-                return StatusCode(500, "There was an error with the search. Please try again");
+            if (movieSearchResponse != null)
+                return Ok(movieSearchResponse);
 
-            return Ok(movieSearchResponse);
+
+            return StatusCode(500, new RecordSearchResponse() { ErrorMessage = "There was an error with the search. Please try again" });
+
+        }
+
+        private IActionResult? ValidateGetMoviesEfSearchSortFIlterState(RecordSearchRequest recordSearchRequestParams)
+        {
+            if (recordSearchRequestParams == null)
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Number of records to fetch and page number are required" });
+
+            if (recordSearchRequestParams.Filters != null)
+            {
+                foreach (var filter in recordSearchRequestParams.Filters)
+                {
+                    //Catering for the one filterable prop on Genre as well as all props on Movie
+                    if (!string.Equals(filter.PropertyName, nameof(Genre.GenreName)) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<Movie>(filter.PropertyName))
+                        return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+
+                    if (EntityAndSqlPropertyHelper.PropertyIsDateTimeType<Movie>(filter.PropertyName))
+                    {
+                        if (!string.IsNullOrWhiteSpace(filter.ValueFromOrEqualTo))
+                        {
+                            if (DateTimeHelper.IsValidDateTimeString(filter.ValueFromOrEqualTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+
+                            if (DateTimeHelper.IsValidDateTimeString(filter.ValueFromOrEqualTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(filter.ValueTo))
+                        {
+                            if (DateTimeHelper.IsValidDateTimeString(filter.ValueTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+                        }
+                    }
+
+                    if (EntityAndSqlPropertyHelper.PropertyIsDecimalType<Movie>(filter.PropertyName))
+                    {
+                        if (!string.IsNullOrWhiteSpace(filter.ValueFromOrEqualTo))
+                        {
+                            if (NumericDataTypeHelper.StringCanBeParsedToDecimal(filter.ValueFromOrEqualTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+
+                            if (NumericDataTypeHelper.StringCanBeParsedToDecimal(filter.ValueFromOrEqualTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(filter.ValueTo))
+                        {
+                            if (NumericDataTypeHelper.StringCanBeParsedToDecimal(filter.ValueTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+
+                            if (NumericDataTypeHelper.StringCanBeParsedToDecimal(filter.ValueTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+                        }
+                    }
+
+                    if (EntityAndSqlPropertyHelper.PropertyIsIntegerType<Movie>(filter.PropertyName))
+                    {
+                        if (!string.IsNullOrWhiteSpace(filter.ValueFromOrEqualTo))
+                        {
+                            if (NumericDataTypeHelper.StringCanBeParsedToInteger(filter.ValueFromOrEqualTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+
+                            if (NumericDataTypeHelper.StringCanBeParsedToInteger(filter.ValueFromOrEqualTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(filter.ValueTo))
+                        {
+                            if (NumericDataTypeHelper.StringCanBeParsedToInteger(filter.ValueTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+
+                            if (NumericDataTypeHelper.StringCanBeParsedToInteger(filter.ValueTo))
+                                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
+                        }
+                    }
+                }
+
+            }
+
+            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<Movie>(recordSearchRequestParams.SortBy))
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {recordSearchRequestParams.SortBy} on sort" });
+
+
+            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !recordSearchRequestParams.SortAscending.HasValue)
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (SortAscending needs setting)" });
+
+            if (recordSearchRequestParams.SortAscending.HasValue && string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy))
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (The sort by property needs providing)" });
+
+            return null;
         }
 
     }

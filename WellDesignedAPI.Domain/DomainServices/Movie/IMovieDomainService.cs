@@ -5,8 +5,9 @@ namespace WellDesignedAPI.Domain.DomainServices
 {
     public interface IMovieDomainService
     {
-        Task<IEnumerable<Movie>> RetrieveMoviesPagedResultsSearch(RecordSearchRequest recordSearchRequestParams);
-
-        Task<int> GetCountOfMovies();
+        IQueryable<Movie> BuildEntityFrameworkQueryForSearchSortFilter(RecordSearchRequest recordSearchRequestParams);
+        Task<int> GetCountOfFilteredResults(IQueryable<Movie> queryToExecute);
+        IQueryable<Movie> ApplyPagingToEntityFrameworkQuery(RecordSearchRequest recordSearchRequestParams, IQueryable<Movie> queryToAmend);
+        Task<IEnumerable<Movie>> RetrieveMoviesPagedResultsSearch(IQueryable<Movie> queryToExecute);
     }
 }

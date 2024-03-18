@@ -24,13 +24,13 @@ namespace WellDesignedAPI.Application.ApplicationServices
             _dbContext = dbContext;
         }
 
-        public async Task<EntitySearchResponse> RetrieveMoviesPagedResultsSearch(RecordSearchRequest recordSearchRequestParams)
+        public async Task<RecordSearchResponse> RetrieveMoviesPagedResultsSearch(RecordSearchRequest recordSearchRequestParams)
         {
             //Get both the COUNT and paged number of records in a transaction, so the results aren't skewed (unlikely but this ensures they are relative at the time of retrieving them)
             try
             {
                 var executionStrategy = _dbContext.Database.CreateExecutionStrategy();
-                EntitySearchResponse result = null;
+                RecordSearchResponse result = null;
 
                 await executionStrategy.ExecuteAsync(async () =>
                 {
@@ -38,12 +38,16 @@ namespace WellDesignedAPI.Application.ApplicationServices
                     {
                         try
                         {
-                            var foundMovieDtos = _mapper.Map<IEnumerable<MovieDto>>(await _movieDomainService.RetrieveMoviesPagedResultsSearch(recordSearchRequestParams));
-
-                            var totalMovieCount = await _movieDomainService.GetCountOfMovies();
-
+                            //build query - minus paging
+                            var queryToExecute = _movieDomainService.BuildEntityFrameworkQueryForSearchSortFilter(recordSearchRequestParams);
+                            //count the total results that would be brought back after search and filter applied
+                            var totalMovieCount = await _movieDomainService.GetCountOfFilteredResults(queryToExecute);
+                            //then apply paging
+                            queryToExecute = _movieDomainService.ApplyPagingToEntityFrameworkQuery(recordSearchRequestParams, queryToExecute);
+                            //run the query to return the found movies
+                            var foundMovieDtos = _mapper.Map<IEnumerable<MovieDto>>(await _movieDomainService.RetrieveMoviesPagedResultsSearch(queryToExecute));
                             await transaction.CommitAsync();
-                            result = new EntitySearchResponse() { Records = foundMovieDtos, CurrentPage = recordSearchRequestParams.RequiredPageNumber, RecordTotalCount = totalMovieCount };
+                            result = new RecordSearchResponse() { Records = foundMovieDtos, CurrentPage = recordSearchRequestParams.RequiredPageNumber, RecordTotalCount = totalMovieCount };
                         }
                         catch (Exception ex)
                         {
