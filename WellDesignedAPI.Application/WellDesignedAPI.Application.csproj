@@ -15,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WellDesignedAPI.Common\WellDesignedAPI.Common.csproj" />
     <ProjectReference Include="..\WellDesignedAPI.Domain\WellDesignedAPI.Domain.csproj" />
-    <ProjectReference Include="..\WellDesignedAPI.EntityFramework\WellDesignedAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.DataAccess\WellDesignedAPI.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

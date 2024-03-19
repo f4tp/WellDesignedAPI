@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Domain", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Common", "WellDesignedAPI.Common\WellDesignedAPI.Common.csproj", "{DB71A108-B167-4E69-A08F-8F2BD652CEB1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.DataAccess", "WellDesignedAPI.EntityFramework\WellDesignedAPI.DataAccess.csproj", "{0733220E-194D-4B4B-9625-E9F5E204162B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Tests.Integration", "WellDesignedAPI.Tests.Integration\WellDesignedAPI.Tests.Integration.csproj", "{AF5039AD-248A-4A61-B29E-12EA4B6B0E55}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Tests.Unit", "WellDesignedAPI.Tests.Unit\WellDesignedAPI.Tests.Unit.csproj", "{2D1A9E62-DDD9-47D0-8585-D47337449D4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.DataAccess", "WellDesignedAPI.DataAccess\WellDesignedAPI.DataAccess.csproj", "{E66E8072-D81E-4274-BD40-D5DAE638098D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +45,6 @@ Global
 		{DB71A108-B167-4E69-A08F-8F2BD652CEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB71A108-B167-4E69-A08F-8F2BD652CEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB71A108-B167-4E69-A08F-8F2BD652CEB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0733220E-194D-4B4B-9625-E9F5E204162B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0733220E-194D-4B4B-9625-E9F5E204162B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0733220E-194D-4B4B-9625-E9F5E204162B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0733220E-194D-4B4B-9625-E9F5E204162B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF5039AD-248A-4A61-B29E-12EA4B6B0E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF5039AD-248A-4A61-B29E-12EA4B6B0E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF5039AD-248A-4A61-B29E-12EA4B6B0E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +53,10 @@ Global
 		{2D1A9E62-DDD9-47D0-8585-D47337449D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D1A9E62-DDD9-47D0-8585-D47337449D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D1A9E62-DDD9-47D0-8585-D47337449D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E66E8072-D81E-4274-BD40-D5DAE638098D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E66E8072-D81E-4274-BD40-D5DAE638098D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E66E8072-D81E-4274-BD40-D5DAE638098D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E66E8072-D81E-4274-BD40-D5DAE638098D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
