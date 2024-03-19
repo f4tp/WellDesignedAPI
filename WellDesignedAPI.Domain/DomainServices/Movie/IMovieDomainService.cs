@@ -1,5 +1,5 @@
 ﻿using WellDesignedAPI.Common.Models.Request;
-using WellDesignedAPI.EntityFramework.Entities;
+using WellDesignedAPI.DataAccess.Entities;
 
 namespace WellDesignedAPI.Domain.DomainServices
 {

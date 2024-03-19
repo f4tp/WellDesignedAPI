@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WellDesignedAPI.Common\WellDesignedAPI.Common.csproj" />
-    <ProjectReference Include="..\WellDesignedAPI.EntityFramework\WellDesignedAPI.EntityFramework.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.EntityFramework\WellDesignedAPI.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

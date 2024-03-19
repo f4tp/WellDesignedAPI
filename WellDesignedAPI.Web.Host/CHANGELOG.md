@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ---------------------------------------------------------------------------------------------------------
+
+## [0.0.3 - 2024-03-19]
+## ADDED
+- Initial unit tests (not finished)
+
+
 ## [0.0.2 - 2024-03-18]
 ## ADDED
 - Validation for filter state
@@ -36,9 +42,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## FIXED
 - Total count for returned records for paged movie search
 
+
 ## [0.0.1 - 2024-03-17]
 ## ADDED
 - Basic, functioning example added
+
 
 ## [0.0.0 - 2024-03-16]
 ## ADDED
