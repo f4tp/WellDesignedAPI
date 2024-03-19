@@ -1,4 +1,4 @@
-# Well Design API
+# Well Designed API
 An exploration of a well designed API
 
 ## Notes
