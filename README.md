@@ -5,7 +5,7 @@ An exploration of a well designed API
 
 Some of the things I intend to do with this, should I find time, are as follows:
 
-- Only a small part unti tested (sorting validation on request), needs finishing
+- Only a small part unit tested (sorting validation on http request), needs finishing
 - I would have liked to have written the API using a TDD approach. This might be utilised for further work.
 - I have almost finished a version of this using Dapper over Entity Framework. This aims to work generically (could be added and used for all entities then, meeting the open-closed principle)
 - Refactor what is there so it works generically (to help it be used with all entities rather than just e.g. Movie)
