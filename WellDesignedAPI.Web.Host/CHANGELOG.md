@@ -29,6 +29,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ---------------------------------------------------------------------------------------------------------
 
+
+## [0.0.4 - 2024-03-19]
+## REFACTOR
+- Changed EF Layer to DataAccess (rename)
+- 
+
 ## [0.0.3 - 2024-03-19]
 ## ADDED
 - Initial unit tests (not finished)

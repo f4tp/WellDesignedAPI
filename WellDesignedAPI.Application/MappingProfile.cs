@@ -22,7 +22,7 @@ namespace WellDesignedAPI.Application
             foreach (var dtoType in dtoTypes)
             {
                 var classNameWithoutDto = dtoType.Name.Split("Dto")[0];
-                var correspondingEntityType = GetTypesInNamespace("WellDesignedAPI.EntityFramework", "Entities")
+                var correspondingEntityType = GetTypesInNamespace("WellDesignedAPI.DataAccess", "Entities")
                     .FirstOrDefault(type => type.Name == classNameWithoutDto);
 
                 if (correspondingEntityType != null)
