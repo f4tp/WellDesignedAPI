@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using WellDesignedAPI.Common.Models.Request;
-using WellDesignedAPI.EntityFramework.DbContexts;
-using WellDesignedAPI.EntityFramework.Entities;
-using WellDesignedAPI.EntityFramework.Extensions;
+using WellDesignedAPI.DataAccess.DbContexts;
+using WellDesignedAPI.DataAccess.Entities;
+using WellDesignedAPI.DataAccess.Extensions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WellDesignedAPI.Domain.DomainServices

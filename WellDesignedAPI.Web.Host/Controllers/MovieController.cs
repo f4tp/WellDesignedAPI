@@ -5,7 +5,7 @@ using WellDesignedAPI.Application.ApplicationServices;
 using WellDesignedAPI.Common.Helpers;
 using WellDesignedAPI.Common.Models.Request;
 using WellDesignedAPI.Common.Models.Response;
-using WellDesignedAPI.EntityFramework.Entities;
+using WellDesignedAPI.DataAccess.Entities;
 
 namespace WellDesignedAPI.Web.Host.Controllers
 {
@@ -32,9 +32,9 @@ namespace WellDesignedAPI.Web.Host.Controllers
         /// <param name="recordSearchRequestParams"></param>
         /// <returns></returns>
         /// <remarks>Is a POST method even though it is a stereotypical GET because query params for searching too complex for a query string</remarks>
-        [HttpPost("SearchMoviesEF")]
+        [HttpPost("GetMovies")]
         [MapToApiVersion("1.0")]
-        public async Task<IActionResult> GetMoviesEf(RecordSearchRequest recordSearchRequestParams)
+        public async Task<IActionResult> GetMovies(RecordSearchRequest recordSearchRequestParams)
         {
 
             //TODO
@@ -57,8 +57,14 @@ namespace WellDesignedAPI.Web.Host.Controllers
 
         private IActionResult? ValidateGetMoviesEfSearchSortFIlterState(RecordSearchRequest recordSearchRequestParams)
         {
-            if (recordSearchRequestParams == null)
-                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Number of records to fetch and page number are required" });
+            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !recordSearchRequestParams.SortAscending.HasValue)
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (SortAscending needs setting)" });
+
+            if (recordSearchRequestParams.SortAscending.HasValue && string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy))
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (The sort by property needs providing)" });
+
+            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<Movie>(recordSearchRequestParams.SortBy))
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {recordSearchRequestParams.SortBy} on sort" });
 
             if (recordSearchRequestParams.Filters != null)
             {
@@ -130,16 +136,6 @@ namespace WellDesignedAPI.Web.Host.Controllers
                 }
 
             }
-
-            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<Movie>(recordSearchRequestParams.SortBy))
-                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {recordSearchRequestParams.SortBy} on sort" });
-
-
-            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !recordSearchRequestParams.SortAscending.HasValue)
-                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (SortAscending needs setting)" });
-
-            if (recordSearchRequestParams.SortAscending.HasValue && string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy))
-                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (The sort by property needs providing)" });
 
             return null;
         }

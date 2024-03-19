@@ -5,7 +5,7 @@ using WellDesignedAPI.Application.DTOs.Entity.GetMovie;
 using WellDesignedAPI.Common.Models.Request;
 using WellDesignedAPI.Common.Models.Response;
 using WellDesignedAPI.Domain.DomainServices;
-using WellDesignedAPI.EntityFramework.DbContexts;
+using WellDesignedAPI.DataAccess.DbContexts;
 
 namespace WellDesignedAPI.Application.ApplicationServices
 {

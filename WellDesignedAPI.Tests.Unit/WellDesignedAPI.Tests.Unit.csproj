@@ -6,4 +6,30 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Systems\AppServices\" />
+    <Folder Include="Systems\DomainServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="Moq.Dapper" Version="1.0.7" />
+    <PackageReference Include="xunit" Version="2.7.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WellDesignedAPI.Application\WellDesignedAPI.Application.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.Common\WellDesignedAPI.Common.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.Domain\WellDesignedAPI.Domain.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.EntityFramework\WellDesignedAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.Web.Host\WellDesignedAPI.Web.Host.csproj" />
+  </ItemGroup>
+
 </Project>

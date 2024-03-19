@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellDesignedAPI.Web.Host", "WellDesignedAPI.Web.Host\WellDesignedAPI.Web.Host.csproj", "{68C79C39-B6B3-450B-B0D0-287173CB3F18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Web.Host", "WellDesignedAPI.Web.Host\WellDesignedAPI.Web.Host.csproj", "{68C79C39-B6B3-450B-B0D0-287173CB3F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellDesignedAPI.Application", "WellDesignedAPI.Application\WellDesignedAPI.Application.csproj", "{5203D170-2202-456F-AA54-594825D4A235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Application", "WellDesignedAPI.Application\WellDesignedAPI.Application.csproj", "{5203D170-2202-456F-AA54-594825D4A235}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7A04D48E-EE28-40DF-973F-3EE4226CBD0A}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellDesignedAPI.Domain", "WellDesignedAPI.Domain\WellDesignedAPI.Domain.csproj", "{99B8E40D-8F91-44D0-BBF7-9284BF072BAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Domain", "WellDesignedAPI.Domain\WellDesignedAPI.Domain.csproj", "{99B8E40D-8F91-44D0-BBF7-9284BF072BAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellDesignedAPI.Common", "WellDesignedAPI.Common\WellDesignedAPI.Common.csproj", "{DB71A108-B167-4E69-A08F-8F2BD652CEB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Common", "WellDesignedAPI.Common\WellDesignedAPI.Common.csproj", "{DB71A108-B167-4E69-A08F-8F2BD652CEB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellDesignedAPI.EntityFramework", "WellDesignedAPI.EntityFramework\WellDesignedAPI.EntityFramework.csproj", "{0733220E-194D-4B4B-9625-E9F5E204162B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.DataAccess", "WellDesignedAPI.EntityFramework\WellDesignedAPI.DataAccess.csproj", "{0733220E-194D-4B4B-9625-E9F5E204162B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellDesignedAPI.Tests.Integration", "WellDesignedAPI.Tests.Integration\WellDesignedAPI.Tests.Integration.csproj", "{AF5039AD-248A-4A61-B29E-12EA4B6B0E55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Tests.Integration", "WellDesignedAPI.Tests.Integration\WellDesignedAPI.Tests.Integration.csproj", "{AF5039AD-248A-4A61-B29E-12EA4B6B0E55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellDesignedAPI.Tests.Unit", "WellDesignedAPI.Tests.Unit\WellDesignedAPI.Tests.Unit.csproj", "{2D1A9E62-DDD9-47D0-8585-D47337449D4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellDesignedAPI.Tests.Unit", "WellDesignedAPI.Tests.Unit\WellDesignedAPI.Tests.Unit.csproj", "{2D1A9E62-DDD9-47D0-8585-D47337449D4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

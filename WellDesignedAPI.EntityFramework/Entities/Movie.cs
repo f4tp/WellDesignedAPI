@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace WellDesignedAPI.EntityFramework.Entities
+namespace WellDesignedAPI.DataAccess.Entities
 {
 
     [Table("Movies")]

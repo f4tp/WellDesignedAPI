@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WellDesignedAPI.EntityFramework.Extensions
+namespace WellDesignedAPI.DataAccess.Extensions
 {
     public static class QueryableExtensions
     {

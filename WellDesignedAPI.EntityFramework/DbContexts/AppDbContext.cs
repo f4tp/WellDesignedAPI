@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WellDesignedAPI.EntityFramework.Entities;
+using WellDesignedAPI.DataAccess.Entities;
 
-namespace WellDesignedAPI.EntityFramework.DbContexts
+namespace WellDesignedAPI.DataAccess.DbContexts
 {
     public class AppDbContext : DbContext
     {

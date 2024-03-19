@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WellDesignedAPI.EntityFramework.DbContexts;
+using WellDesignedAPI.DataAccess.DbContexts;
 
 namespace WellDesignedAPI.Web.Host.Startup.Extensions
 {
