@@ -39,7 +39,7 @@ namespace WellDesignedAPI.Web.Host.Controllers
 
             //TODO
             //Apply logic to allow searching on all properties of the Movie class
-            
+
             var potentialBadRequestToReturn = ValidateGetMoviesEfSearchSortFIlterState(recordSearchRequestParams);
             if (potentialBadRequestToReturn != null)
                 return potentialBadRequestToReturn;

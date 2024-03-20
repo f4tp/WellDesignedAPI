@@ -18,4 +18,18 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Systems\Controllers\" />
+    <Folder Include="Systems\DomainServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WellDesignedAPI.Application\WellDesignedAPI.Application.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.Common\WellDesignedAPI.Common.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.DataAccess\WellDesignedAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.Domain\WellDesignedAPI.Domain.csproj" />
+    <ProjectReference Include="..\WellDesignedAPI.Tests.Unit\WellDesignedAPI.Tests.Unit.csproj" />
+  </ItemGroup>
+
 </Project>
