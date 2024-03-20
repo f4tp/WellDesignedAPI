@@ -37,8 +37,6 @@ Some of the things I intend to do with this, should I find time, are as follows:
 
 ## Description
 
-EcomTest is an e-commerce API that provides a set of endpoints for managing orders, products, and customers.
-
 ## Installation
 
 To install, follow these steps...
