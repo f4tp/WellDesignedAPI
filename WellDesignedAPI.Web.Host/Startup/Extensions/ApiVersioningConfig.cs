@@ -1,7 +1,5 @@
-﻿
-
-using Microsoft.AspNetCore.Mvc;
-
+﻿using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 
 namespace WellDesignedAPI.Web.Host.Startup.Extensions
 {
@@ -21,12 +19,7 @@ namespace WellDesignedAPI.Web.Host.Startup.Extensions
                      options.DefaultApiVersion = new ApiVersion(1, 0);
                  });
 
-            services.AddVersionedApiExplorer(
-                options =>
-                {
-                    options.GroupNameFormat = "'v'VVV";
-                    options.SubstituteApiVersionInUrl = true;
-                });
+            services.AddTransient<IApiVersionDescriptionProvider, DefaultApiVersionDescriptionProvider>();
         }
     }
 }
