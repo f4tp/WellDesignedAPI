@@ -11,9 +11,7 @@ Some of the things I intend to do with this, should I find time, are as follows:
 - Refactor what is there so it works generically (to help it be used with all entities rather than just e.g. Movie)
 - As the project was small, I didn't use migrations / a code-first approach to database creation. The SQLs for this are included in the repo
 - Upgrade to .Net 8 over .Net 7
-- Some deprecated packages used, need to update these
 - Docker isn't configured fully as I have created this in Visual Studio (I would like to e.g. configure for db access, add volumes to bring e.g. the logs out of the container for easy access, docker-compose file not used as spinning up only one container for the API, add a Dockerfile for the publish config as well as the dev env)
-- Implement a Repository pattern for EF
 - Investigate the use of Graph QL for making a more maintainable / generically available / usable endpoint
 - Some todos are littered throughout
 

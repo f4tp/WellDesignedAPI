@@ -29,6 +29,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ---------------------------------------------------------------------------------------------------------
 
+## [0.0.7 - 2024-03-23]
+## REMOVED
+- Deprecated packages
+
+
 ## [0.0.6 - 2024-03-23]
 ## ADDED
 - Data Access layer fully setup
