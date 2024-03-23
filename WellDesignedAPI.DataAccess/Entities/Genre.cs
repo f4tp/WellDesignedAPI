@@ -13,15 +13,5 @@ namespace WellDesignedAPI.DataAccess.Entities
         [Required]
         [Column("Name", TypeName = "NVARCHAR(500)")]
         public string GenreName { get; set; }
-
-        private Genre(){} //for EF, requires a parameterless constructor
-        public Genre(string genreName)
-        {
-            if(string.IsNullOrWhiteSpace(genreName))
-                throw new ArgumentException("Object creation requires a genre name");
-
-            GenreName = genreName;
-        }
-
     }
 }

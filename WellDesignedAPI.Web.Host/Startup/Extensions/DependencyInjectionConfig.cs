@@ -29,6 +29,17 @@ namespace WellDesignedAPI.Web.Host.Startup.Extensions
             {
                 services.AddTransient(reg.Interface, reg.Implementation);
             }
+
+
+            //as above for repositories services
+            var repositoryServiceRegistrations =
+              from type in Assembly.Load("WellDesignedAPI.DataAccess").GetTypes()
+              where !type.IsInterface && !type.IsAbstract && !type.IsEnum && type.Name.ToUpper().Contains("REPOSITORY") && type.Namespace != null && type.Namespace.Contains("Repositories")
+              select new { Interface = type.GetInterfaces().Single(), Implementation = type };
+            foreach (var reg in repositoryServiceRegistrations)
+            {
+                services.AddTransient(reg.Interface, reg.Implementation);
+            }
         }
     }
 }
