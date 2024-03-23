@@ -1,11 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using NLog.Filters;
 using WellDesignedAPI.Application.ApplicationServices;
+using WellDesignedAPI.Application.DTOs.Entity.GetMovie;
 using WellDesignedAPI.Common.Helpers;
 using WellDesignedAPI.Common.Models.Request;
 using WellDesignedAPI.Common.Models.Response;
-using WellDesignedAPI.DataAccess.Entities;
+
+#region Presentation Layer
+//Web.Host
+//  • Host Controllers
+//  • Map JSON to DTO
+//  • Accepts HTTP Requests
+//  • Validates requests
+//  • Calls Application Services
+//  • Returns HTTP Responses
+#endregion
 
 namespace WellDesignedAPI.Web.Host.Controllers
 {
@@ -57,13 +65,16 @@ namespace WellDesignedAPI.Web.Host.Controllers
 
         private IActionResult? ValidateGetMoviesEfSearchSortFIlterState(RecordSearchRequest recordSearchRequestParams)
         {
+            if((recordSearchRequestParams.RequiredPageNumber - 1) * recordSearchRequestParams.NumberOfResultsPerPage < 0)
+                return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Please check the required page no and the number of results requested per page" });
+
             if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !recordSearchRequestParams.SortAscending.HasValue)
                 return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (SortAscending needs setting)" });
 
             if (recordSearchRequestParams.SortAscending.HasValue && string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy))
                 return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with sort state (The sort by property needs providing)" });
 
-            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<Movie>(recordSearchRequestParams.SortBy))
+            if (!string.IsNullOrWhiteSpace(recordSearchRequestParams.SortBy) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<MovieDto>(recordSearchRequestParams.SortBy))
                 return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {recordSearchRequestParams.SortBy} on sort" });
 
             if (recordSearchRequestParams.Filters != null)
@@ -71,10 +82,10 @@ namespace WellDesignedAPI.Web.Host.Controllers
                 foreach (var filter in recordSearchRequestParams.Filters)
                 {
                     //Catering for the one filterable prop on Genre as well as all props on Movie
-                    if (!string.Equals(filter.PropertyName, nameof(Genre.GenreName)) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<Movie>(filter.PropertyName))
+                    if (!string.Equals(filter.PropertyName, nameof(GenreDto.GenreName)) && !EntityAndSqlPropertyHelper.IsPropertyNameValid<MovieDto>(filter.PropertyName))
                         return BadRequest(new RecordSearchResponse() { ErrorMessage = $@"Issue with property name {filter.PropertyName} on filter" });
 
-                    if (EntityAndSqlPropertyHelper.PropertyIsDateTimeType<Movie>(filter.PropertyName))
+                    if (EntityAndSqlPropertyHelper.PropertyIsDateTimeType<MovieDto>(filter.PropertyName))
                     {
                         if (!string.IsNullOrWhiteSpace(filter.ValueFromOrEqualTo))
                         {
@@ -92,7 +103,7 @@ namespace WellDesignedAPI.Web.Host.Controllers
                         }
                     }
 
-                    if (EntityAndSqlPropertyHelper.PropertyIsDecimalType<Movie>(filter.PropertyName))
+                    if (EntityAndSqlPropertyHelper.PropertyIsDecimalType<MovieDto>(filter.PropertyName))
                     {
                         if (!string.IsNullOrWhiteSpace(filter.ValueFromOrEqualTo))
                         {
@@ -113,7 +124,7 @@ namespace WellDesignedAPI.Web.Host.Controllers
                         }
                     }
 
-                    if (EntityAndSqlPropertyHelper.PropertyIsIntegerType<Movie>(filter.PropertyName))
+                    if (EntityAndSqlPropertyHelper.PropertyIsIntegerType<MovieDto>(filter.PropertyName))
                     {
                         if (!string.IsNullOrWhiteSpace(filter.ValueFromOrEqualTo))
                         {

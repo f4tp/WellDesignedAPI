@@ -29,7 +29,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ---------------------------------------------------------------------------------------------------------
 
-
+## [0.0.6 - 2024-03-23]
+## ADDED
+- Data Access layer fully setup
 
 ## [0.0.5 - 2024-03-20]
 ## ADDED
@@ -43,7 +45,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## ADDED
 - Initial unit tests (not finished)
 
-
 ## [0.0.2 - 2024-03-18]
 ## ADDED
 - Validation for filter state
@@ -52,11 +53,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## FIXED
 - Total count for returned records for paged movie search
 
-
 ## [0.0.1 - 2024-03-17]
 ## ADDED
 - Basic, functioning example added
-
 
 ## [0.0.0 - 2024-03-16]
 ## ADDED

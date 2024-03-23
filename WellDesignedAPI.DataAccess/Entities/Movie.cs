@@ -42,39 +42,7 @@ namespace WellDesignedAPI.DataAccess.Entities
         [Column("PosterUrl", TypeName = "NVARCHAR(MAX)")]
         public string? UrlForPoster { get; set; }
 
+        public IEnumerable<MovieGenre> MovieGenres { get; set; }
 
-        //as using EF, to minimise risk with accidental deletion / update, backing prop has to be interacted with through the methods below
-        private List<MovieGenre>? _movieGenres;
-        public IEnumerable<MovieGenre>? MovieGenres { get { return _movieGenres; } }
-
-
-        private Movie(){ } //EF requires a parameterless constructor
-
-        //Constructor to only allow creation of object with correct props and 
-        public Movie(string movieTitle, string mainLanguage)
-        {
-            if(string.IsNullOrWhiteSpace(movieTitle))
-                throw new ArgumentException("Object creation requires a movie title");
-
-            if (string.IsNullOrWhiteSpace(mainLanguage))
-                throw new ArgumentException("Object creation requires a main language");
-
-            //To do - validate language passed in is valid, will lookup in valid instances
-            _movieGenres = new List<MovieGenre>();
-            MovieTitle = movieTitle;
-            MainLanguage = mainLanguage;
-        }
-
-        public MovieGenre AddMovieGenre(Genre genre)
-        {
-            var movieGenreToAdd = new MovieGenre(this, genre);
-            _movieGenres.Add(movieGenreToAdd);
-            return movieGenreToAdd;
-        }
-
-        public void RemoveMovieGenre(MovieGenre movieGenre)
-        {
-            _movieGenres.Remove(movieGenre);
-        }
     }
 }

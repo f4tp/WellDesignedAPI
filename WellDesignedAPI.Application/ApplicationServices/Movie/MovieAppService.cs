@@ -7,6 +7,25 @@ using WellDesignedAPI.Common.Models.Response;
 using WellDesignedAPI.Domain.DomainServices;
 using WellDesignedAPI.DataAccess.DbContexts;
 
+#region Application Layer
+//Application
+//  •	Host AppServices
+//  •	Hosts DTOs
+//      • Behaviours
+//          • Anaemic Domain Model
+//      • Data content
+//          • Properties
+//          • Validation attributes (for JSON to DTO mapping)
+//  • Map DTOs<> DomEnts
+//  • Purposes
+//      • Calls DomainServices
+//      • Validate requests when that validation extends past the responsibility of the Controller
+//          • Goes through DomainService > DataAccess layer to retrieve then validation logic exists in app services
+//      • Manages database transactions
+//  • Never interacts with the database
+
+#endregion
+
 namespace WellDesignedAPI.Application.ApplicationServices
 {
     public class MovieAppService : IMovieAppService
@@ -39,15 +58,15 @@ namespace WellDesignedAPI.Application.ApplicationServices
                         try
                         {
                             //build query - minus paging
-                            var queryToExecute = _movieDomainService.BuildEntityFrameworkQueryForSearchSortFilter(recordSearchRequestParams);
+                            var queryToExecute = _movieDomainService.GetEntityFrameworkQueryForSearchSortFilter(recordSearchRequestParams);
                             //count the total results that would be brought back after search and filter applied
                             var totalMovieCount = await _movieDomainService.GetCountOfFilteredResults(queryToExecute);
                             //then apply paging
                             queryToExecute = _movieDomainService.ApplyPagingToEntityFrameworkQuery(recordSearchRequestParams, queryToExecute);
                             //run the query to return the found movies
-                            var foundMovieDtos = _mapper.Map<IEnumerable<MovieDto>>(await _movieDomainService.RetrieveMoviesPagedResultsSearch(queryToExecute));
+                            var foundMovieDomEnts = await _movieDomainService.RetrieveMoviesPagedResultsSearch(queryToExecute);
                             await transaction.CommitAsync();
-                            result = new RecordSearchResponse() { Records = foundMovieDtos, CurrentPage = recordSearchRequestParams.RequiredPageNumber, RecordTotalCount = totalMovieCount };
+                            result = new RecordSearchResponse() { Records = _mapper.Map<IEnumerable<MovieDto>>(foundMovieDomEnts), CurrentPage = recordSearchRequestParams.RequiredPageNumber, RecordTotalCount = totalMovieCount };
                         }
                         catch (Exception ex)
                         {

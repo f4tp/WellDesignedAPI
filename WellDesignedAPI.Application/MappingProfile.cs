@@ -16,12 +16,30 @@ namespace WellDesignedAPI.Application
         /// </summary>
         private void DiscoverAndManageAutoMapperMappings()
         {
+            //Map Dtos to Domain Entity types (and vice versa)
             var dtoTypes = GetTypesInNamespace("WellDesignedAPI.Application", "DTOs")
-                .Where(type => type.IsClass && type.Name.Contains("Dto"));
+               .Where(type => type.IsClass && type.Name.Contains("Dto"));
 
             foreach (var dtoType in dtoTypes)
             {
                 var classNameWithoutDto = dtoType.Name.Split("Dto")[0];
+                var correspondingEntityType = GetTypesInNamespace("WellDesignedAPI.Domain", "DomainEntities")
+                    .FirstOrDefault(type => type.Name == $@"{classNameWithoutDto}DomEnt");
+
+                if (correspondingEntityType != null)
+                {
+                    CreateMap(correspondingEntityType, dtoType);
+                    CreateMap(dtoType, correspondingEntityType);
+                }
+            }
+
+            //map Domain Entity types to Domain Entities (and vice versa)
+            var domainEntitiyTypes = GetTypesInNamespace("WellDesignedAPI.Domain", "DomainEntities")
+              .Where(type => type.IsClass && type.Name.Contains("DomEnt"));
+
+            foreach (var dtoType in domainEntitiyTypes)
+            {
+                var classNameWithoutDto = dtoType.Name.Split("DomEnt")[0];
                 var correspondingEntityType = GetTypesInNamespace("WellDesignedAPI.DataAccess", "Entities")
                     .FirstOrDefault(type => type.Name == classNameWithoutDto);
 
@@ -31,6 +49,7 @@ namespace WellDesignedAPI.Application
                     CreateMap(dtoType, correspondingEntityType);
                 }
             }
+
         }
 
         private static IEnumerable<Type> GetTypesInNamespace(string projectName, string directoryName)
